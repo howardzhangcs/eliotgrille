@@ -1,0 +1,21 @@
+<h1> Remove Food from Menu </h1>
+
+{% if latest_menu_list %}
+    <form action="{% url 'u_remmenu' %}" method="post">
+    {% csrf_token %}
+    <h3> Food </h3> 
+    <select name="food"/> 
+	{% for menu in latest_menu_list%}
+	    <option value= "{{menu.food}}" > {{menu.food}} </option>
+	{% endfor %}
+    </br>
+    </br>
+    <input type="submit" value="Submit" />
+    </form>
+{% else %}
+    <p>No items in menu.</p>
+{% endif %}
+
+<a href="{% url 'index' %}">Return back to Main Menu</a>
+
+

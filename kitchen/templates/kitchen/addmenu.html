@@ -1,0 +1,14 @@
+<h1> Add New Food to Menu </h1>
+
+    <form action="{% url 'u_addmenu' %}" method="post">
+    {% csrf_token %}
+    <h3> Food </h3> <input type=text name="food"/> 
+    <h3> Price </h3> <input type=text name="price"/>  
+    </br>
+    </br>
+    <input type="submit" value="Submit" />
+    </form>
+
+<a href="{% url 'index' %}">Return back to Main Menu</a>
+
+

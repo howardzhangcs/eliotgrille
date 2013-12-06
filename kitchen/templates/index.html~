@@ -1,0 +1,5 @@
+<h1>Welcome Employee!</h1>
+<ul>
+    <li><a href="{% url 'inventory' %}">Inventory</a></li>
+    <li><a href="{% url 'updateinven' %}">Update Inventory</a></li>
+</ul>

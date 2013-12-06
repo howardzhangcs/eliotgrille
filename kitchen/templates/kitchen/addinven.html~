@@ -1,0 +1,13 @@
+<h1> Add New Ingredient to Inventory </h1>
+
+    <form action="{% url 'u_addinven' %}" method="post">
+    <h3> Ingredient </h3> <input type=text name="ingredient"/> 
+    <h3> Quantity </h3> <input type=text name="quantity"/>  
+    </br>
+    </br>
+    <input type="submit" value="Submit" />
+    </form>
+
+<a href="{% url 'index' %}">Return back to Main Menu</a>
+
+

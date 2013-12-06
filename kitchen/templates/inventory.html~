@@ -1,0 +1,10 @@
+{% if latest_inventory_list %}
+    <ul>
+    {% for inventory in latest_inventory_list %}
+        <li>{{ inventory.material }}</li>
+        <li>{{ inventory.stock_material }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No items in inventory.</p>
+{% endif %}

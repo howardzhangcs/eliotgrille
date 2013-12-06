@@ -1,0 +1,21 @@
+<h1> Remove Ingredient from Inventory </h1>
+
+{% if latest_inventory_list %}
+    <form action="{% url 'u_reminven' %}" method="post">
+    {% csrf_token %}
+    <h3> Ingredient </h3> 
+    <select name="ingredient"/> 
+	{% for inventory in latest_inventory_list%}
+	    <option value={{inventory.material}}> {{inventory.material}} </option>
+	{% endfor %}
+    </br>
+    </br>
+    <input type="submit" value="Submit" />
+    </form>
+{% else %}
+    <p>No items in inventory.</p>
+{% endif %}
+
+<a href="{% url 'index' %}">Return back to Main Menu</a>
+
+
