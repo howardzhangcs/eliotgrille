@@ -1,13 +1,9 @@
 <h1> Menu </h1>
 
 {% if latest_menu_list %}
-
     {% for menu in latest_menu_list %}
         <div>{{ menu.food }}: ${{menu.price_food}}</div> </br>
     {% endfor %}
-    
 {% else %}
     <p>No items on menu.</p>
 {% endif %}
-
-<a href="{% url 'index' %}">Return back to Main Menu</a>

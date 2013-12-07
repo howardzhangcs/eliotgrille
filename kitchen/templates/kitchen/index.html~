@@ -6,21 +6,13 @@
 </head>
 
 <body>
+    <h1> Welcome to the Eliot Grille </h1>
     <div id="sidebar">
         {% block sidebar %}
         <h4> Menu </h4>
         <ul>
             <li><a href="{% url 'menu' %}">Menu</a></li>
-    	    <li><a href="{% url 'updatemenu' %}">Update Price in Menu</a></li>
-    	    <li><a href="{% url 'addmenu' %}">Add Food to Menu</a></li>
-    	    <li><a href="{% url 'remmenu' %}">Remove Food from Menu</a></li>
-	</ul>
-        <h4> Inventory </h4>
-        <ul>
-            <li><a href="{% url 'inventory' %}">Inventory</a></li>
-    	    <li><a href="{% url 'updateinven' %}">Update Quantity in Inventory</a></li>
-    	    <li><a href="{% url 'addinven' %}">Add Ingredient to Inventory</a></li>
-    	    <li><a href="{% url 'reminven' %}">Remove Ingredient from Inventory</a></li>
+            <p> Click <a href = "{% url 'login' %}"> here </a> to login. </p>
         </ul>
         {% endblock %}
     </div>

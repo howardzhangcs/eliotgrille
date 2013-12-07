@@ -5,7 +5,7 @@
     {% csrf_token %}
     <select name="food">
     {% for menu in latest_menu_list%}
-	<option value= {{menu.food}} >{{menu.food}}</option>
+	<option value= "{{menu.food}}" >{{menu.food}}</option>
     {% endfor %} </select>
     Price <input type="text" name = "price">  
     </br>

@@ -1,4 +1,4 @@
-{% extends "kitchen/index.html" %}
+{% extends "kitchen/employee.html" %}
 
 {% block content %}
 
@@ -6,9 +6,9 @@
         <p class='error'> Sorry, that's not a valid username or password </p>
     {% endif %}
 
-        <form method="post" action="/accounts/auth">{% csrf_token %}
-        <h3> Username </h3> <input type=text name="username" value="" id="username"/>   
-        <h3> Password </h3> <input type=text name="password" value="" id="password"/>  
+        <form method="post" action="/accounts/auth/">{% csrf_token %}
+        <h3> Username </h3> <input type="text" name="username" value="" id="username"/>   
+        <h3> Password </h3> <input type="password" name="password" value="" id="password"/>  
         <input type="submit" value="login" />
 
     </form>

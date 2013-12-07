@@ -6,7 +6,7 @@
     <h3> Food </h3> 
     <select name="food"/> 
 	{% for menu in latest_menu_list%}
-	    <option value= {{menu.food}} > {{menu.food}} </option>
+	    <option value= "{{menu.food}}" > {{menu.food}} </option>
 	{% endfor %}
     </br>
     </br>

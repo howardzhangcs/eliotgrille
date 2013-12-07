@@ -1,4 +1,3 @@
-{% extends "kitchen/index.html" %}
 
 {% block content %}
 
@@ -7,8 +6,8 @@
     {% endif %}
 
         <form method="post" action="/accounts/auth/">{% csrf_token %}
-        <h3> Username </h3> <input type=text name="username" value="" id="username"/>   
-        <h3> Password </h3> <input type=text name="password" value="" id="password"/>  
+        <h3> Username </h3> <input type="text" name="username" value="" id="username"/>   
+        <h3> Password </h3> <input type="password" name="password" value="" id="password"/>  
         <input type="submit" value="login" />
 
     </form>

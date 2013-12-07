@@ -6,7 +6,7 @@
     <h3> Ingredient </h3> 
     <select name="ingredient"/> 
 	{% for inventory in latest_inventory_list%}
-	    <option value={{inventory.material}}> {{inventory.material}} </option>
+	    <option value= "{{inventory.material}}" > {{inventory.material}} </option>
 	{% endfor %}
     </br>
     </br>

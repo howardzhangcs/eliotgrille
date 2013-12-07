@@ -1,4 +1,4 @@
-{% extends "kitchen/index.html" %}
+{% extends "kitchen/employee.html" %}
 
 {% block content %}
 

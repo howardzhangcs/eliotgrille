@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.db.utils import IntegrityError
 from django.contrib import auth
 from django.core.context_processors import csrf 
+from django.contrib.auth.decorators import login_required
 
 ##################################GENERAL##############################
 
@@ -14,11 +15,18 @@ from django.core.context_processors import csrf
 def index(request):
     return render(request, 'kitchen/index.html')
 
+#Index for employees
+@login_required(login_url='/accounts/login/')
+def employee(request):
+    return render(request, 'kitchen/employee.html')
+
 #Success
+@login_required(login_url='/accounts/login/')
 def successresults(request):
     return render(request, 'kitchen/successresults.html')
 
 #Failure
+@login_required(login_url='/accounts/login/')
 def failresults(request):
     return render(request, 'kitchen/failresults.html')
 
@@ -74,6 +82,7 @@ class UpdateView(generic.ListView):
         return Inventory.objects.all()
 
 #site to add new item to inventory
+@login_required(login_url='/accounts/login/')
 def addinven(request):
     return render(request, 'kitchen/addinven.html')
 
@@ -89,6 +98,7 @@ class ReminvenView(generic.ListView):
 ###################PROCESSING FOR INVENTORY#########################################
 
 #Updates the quantity of Inventory
+@login_required(login_url='/accounts/login/')
 def u_inven(request):
     p = Inventory.objects.get(material=request.POST['ingredient'])
     try: 
@@ -103,6 +113,7 @@ def u_inven(request):
         return HttpResponseRedirect(reverse('successresults'))
 
 #Updates the addition of a new item to Inventory
+@login_required(login_url='/accounts/login/')
 def u_addinven(request):
     p = request.POST['ingredient']
     try:
@@ -120,6 +131,7 @@ def u_addinven(request):
 	    return HttpResponseRedirect(reverse('failresults'))
 
 #Updates the removal of an existing item from Inventory
+@login_required(login_url='/accounts/login/')
 def u_reminven(request):
     Inventory.objects.filter(material=request.POST['ingredient']).delete()
     return HttpResponseRedirect(reverse('successresults'))
@@ -137,6 +149,7 @@ class MenuView(generic.ListView):
         return Menu.objects.all()
 
 #site to add food to menu
+@login_required(login_url='/accounts/login/')
 def addmenu(request):
     return render(request, 'kitchen/addmenu.html')
 
@@ -158,7 +171,8 @@ class UpdateMenuView(generic.ListView):
 
 #######################PROCESSING FOR MENU#############################################
 
-#Updates the addition of new food to menu
+#Updates the addition of new food to menu)
+@login_required(login_url='/accounts/login/')
 def u_addmenu(request):
     p = request.POST['food']
     try:
@@ -176,11 +190,13 @@ def u_addmenu(request):
   	    return HttpResponseRedirect(reverse('failresults'))
 
 #Updates the removal of existing food from menu
+@login_required(login_url='/accounts/login/')
 def u_remmenu(request):
     Menu.objects.filter(food=request.POST['food']).delete()
     return HttpResponseRedirect(reverse('successresults'))
 
 #Updates the change in price in menu
+@login_required(login_url='/accounts/login/')
 def u_menu(request):
     p = Menu.objects.get(food=request.POST['food'])
     try:
