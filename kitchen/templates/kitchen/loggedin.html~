@@ -1,6 +1,2 @@
 {% extends "kitchen/employee.html" %}
 
-{% block content %}
-
-    <h2> Hi {{full_name}} you are now logged in! </h2>
-{% endblock %}

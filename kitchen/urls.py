@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     url(r'^failresults/$', views.failresults, name='failresults'),
 
     # employee index
-    url(r'^employee/$', views.employee, name = 'employee'),
+    url(r'^employee/$', login_required(views.EmployeeView.as_view()), name = 'employee'),
     
     # inventory
     url(r'^inventory/$', login_required(views.InventoryView.as_view()), name='inventory'),

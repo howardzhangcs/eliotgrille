@@ -10,7 +10,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # general index
-    url(r'^$', views.menu, name='menu'),
+    url(r'^$', views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
     
     # login/logout

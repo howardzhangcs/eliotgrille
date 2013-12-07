@@ -16,9 +16,11 @@ def index(request):
     return redirect('menu')
 
 #Index for employees
-@login_required(login_url='/accounts/login/')
-def employee(request):
-    return render(request, 'kitchen/employee.html')
+class EmployeeView(generic.ListView):
+    template_name = 'kitchen/employee.html'
+    context_object_name = 'latest_order_list'
+    def get_queryset(self):
+        return Order.objects.all()
 
 #Success
 @login_required(login_url='/accounts/login/')
@@ -105,7 +107,7 @@ def u_inven(request):
         n = int(request.POST['quantity'])
     except ValueError:
         return HttpResponseRedirect(reverse('failresults'))
-    if n == 0:
+    if n == 0 or p.stock_material - n < 0:
         return HttpResponseRedirect(reverse('failresults'))
     else:
         p.stock_material += int(request.POST['quantity'])
