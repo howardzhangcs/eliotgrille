@@ -1,0 +1,27 @@
+<h1> Make Order </h1>
+
+{% if latest_menu_list %}
+    <form action="{% url 'u_makeorder' %}" method="post">
+    {% csrf_token %}
+    <h3> Food </h3> 
+    <select name="food"/> 
+	{% for menu in latest_menu_list%}
+	    <option value= "{{menu.food}}" > {{menu.food}} </option>
+	{% endfor %}
+    </select>
+    <h3> Quantity </h3>
+    <select name="quantity"/> 
+	<option value= "0" selected> 0 </option>
+        <option value= "1" > 1 </option>
+        <option value= "2" > 2 </option>
+        <option value= "3" > 3 </option>
+    </select> 
+    </br>
+    </br>
+    <input type="submit" value="Submit" />
+    </form>
+{% else %}
+    <p>No items in menu</p>
+{% endif %}
+
+<a href="{% url 'employee' %}">Return back to Main Menu</a>

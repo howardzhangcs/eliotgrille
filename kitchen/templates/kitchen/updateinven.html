@@ -8,17 +8,17 @@
 	{% for inventory in latest_inventory_list%}
 	    <option value= "{{inventory.material}}" > {{inventory.material}} </option>
 	{% endfor %}
-        </select>
-        <h3> Quantity </h3>
-        <select name="quantity"/> 
-            <option value= "3" > 3 </option>
-            <option value= "2" > 2 </option>
-            <option value= "1" > 1 </option>
-	    <option value= "0" selected> 0 </option>
-            <option value= "-1" > -1 </option>
-            <option value= "-2" > -2 </option>
-            <option value= "-3" > -3 </option>        
-	</select> 
+    </select>
+    <h3> Quantity </h3>
+    <select name="quantity"/> 
+        <option value= "3" > 3 </option>
+        <option value= "2" > 2 </option>
+        <option value= "1" > 1 </option>
+	<option value= "0" selected> 0 </option>
+        <option value= "-1" > -1 </option>
+        <option value= "-2" > -2 </option>
+        <option value= "-3" > -3 </option>        
+    </select> 
     </br>
     </br>
     <input type="submit" value="Submit" />

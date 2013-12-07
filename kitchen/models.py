@@ -20,8 +20,9 @@ class Menu(models.Model):
 
 #Order Model
 class Order(models.Model):
-    order_food = models.CharField(unique=True, max_length=200)
-    order_quantity = models.DecimalField(max_digits = 4, decimal_places = 2, default=0.00)
+    order_food = models.CharField(max_length=200)
+    order_quantity = models.PositiveIntegerField(default=0)
+    is_currentorder = models.BooleanField(default=True)
     dateofentry = models.DateTimeField('date published')
     def __unicode__(self):
         return self.order_food

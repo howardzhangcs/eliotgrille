@@ -23,6 +23,13 @@
     	    <li><a href="{% url 'addinven' %}">Add Ingredient to Inventory</a></li>
     	    <li><a href="{% url 'reminven' %}">Remove Ingredient from Inventory</a></li>
         </ul>
+        <h4> Order </h4>
+        <ul>
+            <li><a href="{% url 'inventory' %}">Inventory</a></li>
+    	    <li><a href="{% url 'updateinven' %}">Update Quantity in Inventory</a></li>
+    	    <li><a href="{% url 'addinven' %}">Add Ingredient to Inventory</a></li>
+    	    <li><a href="{% url 'reminven' %}">Remove Ingredient from Inventory</a></li>
+        </ul>
         {% endblock %}
     </div>
 

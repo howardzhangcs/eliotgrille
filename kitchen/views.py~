@@ -1,13 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
-from kitchen.models import Inventory, Menu
+from kitchen.models import Inventory, Menu, Order
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.db.utils import IntegrityError
 from django.contrib import auth
 from django.core.context_processors import csrf 
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 
 ##################################GENERAL##############################
 
@@ -82,7 +82,7 @@ class UpdateView(generic.ListView):
         return Inventory.objects.all()
 
 #site to add new item to inventory
-@user_passes_test(lambda u: u.is_staff)
+@login_required(login_url='/accounts/login/')
 def addinven(request):
     return render(request, 'kitchen/addinven.html')
 
@@ -113,7 +113,7 @@ def u_inven(request):
         return HttpResponseRedirect(reverse('successresults'))
 
 #Updates the addition of a new item to Inventory
-@user_passes_test(lambda u: u.is_staff)
+@login_required(login_url='/accounts/login/')
 def u_addinven(request):
     p = request.POST['ingredient']
     try:
@@ -131,7 +131,7 @@ def u_addinven(request):
 	    return HttpResponseRedirect(reverse('failresults'))
 
 #Updates the removal of an existing item from Inventory
-@user_passes_test(lambda u: u.is_staff)
+@login_required(login_url='/accounts/login/')
 def u_reminven(request):
     Inventory.objects.filter(material=request.POST['ingredient']).delete()
     return HttpResponseRedirect(reverse('successresults'))
@@ -172,7 +172,7 @@ class UpdateMenuView(generic.ListView):
 #######################PROCESSING FOR MENU#############################################
 
 #Updates the addition of new food to menu)
-@user_passes_test(lambda u: u.is_staff)
+@login_required(login_url='/accounts/login/')
 def u_addmenu(request):
     p = request.POST['food']
     try:
@@ -190,13 +190,13 @@ def u_addmenu(request):
   	    return HttpResponseRedirect(reverse('failresults'))
 
 #Updates the removal of existing food from menu
-@user_passes_test(lambda u: u.is_staff)
+@login_required(login_url='/accounts/login/')
 def u_remmenu(request):
     Menu.objects.filter(food=request.POST['food']).delete()
     return HttpResponseRedirect(reverse('successresults'))
 
 #Updates the change in price in menu
-@user_passes_test(lambda u: u.is_staff)
+@login_required(login_url='/accounts/login/')
 def u_menu(request):
     p = Menu.objects.get(food=request.POST['food'])
     try:
@@ -214,3 +214,30 @@ def u_menu(request):
 	    return HttpResponseRedirect(reverse('failresults'))
 
 #######################################################################################
+
+
+####################Ordering for Kitchen#######################################
+#displays site to make order
+class MakeOrderView(generic.ListView):    
+    template_name = 'kitchen/makeorder.html'
+    context_object_name = 'latest_menu_list'
+    def get_queryset(self):
+        return Menu.objects.all()
+
+@login_required(login_url='/accounts/login/')
+def u_makeorder(request):
+    p = request.POST['food']
+    try:
+        n = int(request.POST['quantity'])
+    except ValueError:
+        return HttpResponseRedirect(reverse('failresults'))      
+    if  n < 0 or n > 99:
+        return HttpResponseRedirect(reverse('failresults')) 
+    else:
+        try:
+            m = Order(order_food = p, order_quantity = n, dateofentry = timezone.now(), is_currentorder = True)
+            m.save()
+            return HttpResponseRedirect(reverse('successresults'))
+	except IntegrityError:
+  	    return HttpResponseRedirect(reverse('failresults'))
+

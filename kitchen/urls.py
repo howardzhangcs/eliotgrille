@@ -9,6 +9,7 @@ admin.autodiscover()
 
 
 urlpatterns = patterns('',
+    # general index
     url(r'^$', views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
     
@@ -19,7 +20,11 @@ urlpatterns = patterns('',
     url(r'^accounts/loggedin/$', views.loggedin, name = 'loggedin'),
     url(r'^accounts/invalid/$', views.invalid_login, name = 'invalid_login'),
     
-    # employee
+    # success/failure
+    url(r'^successresults/$', views.successresults, name='successresults'),
+    url(r'^failresults/$', views.failresults, name='failresults'),
+
+    # employee index
     url(r'^employee/$', views.employee, name = 'employee'),
     
     # inventory
@@ -27,6 +32,7 @@ urlpatterns = patterns('',
     url(r'^updateinven/$', login_required(views.UpdateView.as_view()), name='updateinven'),
     url(r'^u_inven/$', views.u_inven, name='u_inven'),
     
+    # superuser restricted inventory
     url(r'^addinven/$', views.addinven, name='addinven'),
     url(r'^reminven/$', login_required(views.ReminvenView.as_view()), name='reminven'),
     url(r'^u_addinven/$', views.u_addinven, name='u_addinven'),
@@ -34,16 +40,17 @@ urlpatterns = patterns('',
     
     # menu
     url(r'^menu/$', views.MenuView.as_view(), name='menu'),
+    url(r'^updatemenu/$',  login_required(views.UpdateMenuView.as_view()), name='updatemenu'),
+    url(r'^u_menu/$', views.u_menu, name='u_menu'),    
+
+    # superuser restricted menu
     url(r'^addmenu/$', views.addmenu, name='addmenu'),
-    url(r'^remmenu/$',  login_required(views.RemmenuView.as_view()), name='remmenu'),
+    url(r'^remmenu/$',  login_required(views.RemmenuView.as_view()), name='remmenu'),   
     url(r'^u_addmenu/$', views.u_addmenu, name='u_addmenu'),
     url(r'^u_remmenu/$', views.u_remmenu, name='u_remmenu'),
-    url(r'^updatemenu/$',  login_required(views.UpdateMenuView.as_view()), name='updatemenu'),
-    url(r'^u_menu/$', views.u_menu, name='u_menu'),
     
-    # success/failure
-    url(r'^successresults/$', views.successresults, name='successresults'),
-    url(r'^failresults/$', views.failresults, name='failresults'),
-    #url(r'^order/$', views.orderView.as_view(), name='order'),
+    # ordering system - kitchen side
+    url(r'^makeorder/$', login_required(views.MakeOrderView.as_view()), name='makeorder'),
+    url(r'^u_makeorder/$', views.u_makeorder, name='u_makeorder'),
     #url(r'^currentorders/$', views.MUpdateView.as_view(), name='currentorders'),
 )
