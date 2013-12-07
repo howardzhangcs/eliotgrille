@@ -2,6 +2,7 @@ from django.conf.urls import patterns, url, include
 
 from kitchen import views
 
+
 from django.contrib import admin
 admin.autodiscover()
 
