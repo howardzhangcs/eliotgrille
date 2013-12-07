@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from kitchen.models import Inventory, Menu, Order
 from django.http import HttpResponseRedirect
@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 
 #Index
 def index(request):
-    return render(request, 'kitchen/index.html')
+    return redirect('menu')
 
 #Index for employees
 @login_required(login_url='/accounts/login/')

@@ -1,20 +1,8 @@
 <h1> Menu </h1>
 
+<h1> Menu </h1>
+
 {% if latest_menu_list %}
-    {% for inventory in latest_inventory_list%}
-        <option value= "{{inventory.material}}" > {{inventory.material}} </option>
-    {% endfor %}
-        </select>
-        <h3> Quantity </h3>
-        <select name="quantity"/> 
-            <option value= "3" > 3 </option>
-            <option value= "2" > 2 </option>
-            <option value= "1" > 1 </option>
-	    <option value= "0" selected> 0 </option>
-            <option value= "-1" > -1 </option>
-            <option value= "-2" > -2 </option>
-            <option value= "-3" > -3 </option>        
-	</select> 
     {% for menu in latest_menu_list %}
         <div>{{ menu.food }}: ${{menu.price_food}}</div> </br>
     {% endfor %}
@@ -22,4 +10,4 @@
     <p>No items on menu.</p>
 {% endif %}
 
-<a href="{% url 'employee' %}">Return back to Main Menu</a>
+<a href="{% url 'login' %}">Click here to login</a>
