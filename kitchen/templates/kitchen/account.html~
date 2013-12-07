@@ -1,0 +1,15 @@
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<table>
+<tr>
+    <h3> username </h3> <input type=text name="username"/>   
+</tr>
+<tr>
+    <h3> password </h3> <input type=text name="password"/>  
+</tr>
+</table>
+
+<input type="submit" value="login" />
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+

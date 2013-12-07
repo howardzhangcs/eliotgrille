@@ -8,6 +8,15 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
+    
+    # login/logout
+    url(r'^accounts/login/$', views.login, name = 'login'),
+    url(r'^accounts/auth/$', views.auth_view, name = 'auth'),
+    url(r'^accounts/logout/$', views.logout, name = 'logout'),
+    url(r'^accounts/loggedin/$', views.loggedin, name = 'loggedin'),
+    url(r'^accounts/invalid/$', views.invalid_login, name = 'invalid_login'),
+
+    #inventory
     url(r'^inventory/$', views.InventoryView.as_view(), name='inventory'),
     url(r'^updateinven/$', views.UpdateView.as_view(), name='updateinven'),
     url(r'^u_inven/$', views.u_inven, name='u_inven'),

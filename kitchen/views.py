@@ -5,10 +5,11 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.db.utils import IntegrityError
-
-# Create your views here.
+from django.contrib import auth
+from django.core.context_processors import csrf 
 
 ##################################GENERAL##############################
+
 #Index
 def index(request):
     return render(request, 'kitchen/index.html')
@@ -20,6 +21,38 @@ def successresults(request):
 #Failure
 def failresults(request):
     return render(request, 'kitchen/failresults.html')
+
+#view for Login
+#http://www.youtube.com/watch?v=CFypO_LNmcc
+def login(request):
+    c = {}
+    c.update(csrf(request))
+    return render(request, 'kitchen/login.html', c)
+
+#logic for Login
+#http://www.djangobook.com/en/2.0/chapter14.html
+def auth_view(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = auth.authenticate(username=username, password=password)
+    if user is not None:
+        auth.login(request, user)
+        return HttpResponseRedirect(reverse('loggedin'))
+    else:
+        return HttpResponseRedirect(reverse('invalid_login'))
+
+#display successful login
+def loggedin(request):
+    return render(request, 'kitchen/loggedin.html', {'full_name': request.user.username})
+
+#display failed login
+def invalid_login(request):
+    return render(request, 'kitchen/invalid_login.html')
+
+#Logout
+def logout(request):
+    auth.logout(request)
+    return render(request, 'kitchen/logout.html')
 
 ########################################################################
 

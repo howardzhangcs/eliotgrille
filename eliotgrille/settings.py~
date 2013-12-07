@@ -50,11 +50,13 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'customer.urls'
+ROOT_URLCONF = 'kitchen.urls'
 
 WSGI_APPLICATION = 'eliotgrille.wsgi.application'
 
-
+TEMPLATE_DIRS = (
+    "/home/eliotgrille/",
+)
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
