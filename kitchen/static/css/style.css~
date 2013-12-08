@@ -7,6 +7,34 @@
  * Global CSS.
  */
 
+#main {
+    float:left;
+    width:700px;
+}
+
+#sidebar {
+	float:right;
+    width:200px;
+}
+
+#tableelement{
+	float: center;
+}
+#maintitle
+{
+    font-weight: bold;
+}
+
+#heading
+{
+    color: #35CDFF;
+}
+
+#login
+{
+    text-align: center;
+}
+
 .container
 {
     /* center contents */

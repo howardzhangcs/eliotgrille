@@ -27,70 +27,96 @@ function delete_order_comment(pk){
 </script>
 
 <body>
-    <h1> Welcome to the Eliot Grille </h1>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" id="heading" href="{% url 'menu' %}">Eliot Grille</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"> <a id="heading" href="{% url 'employee' %}">Home</a></li>
+		    <li><a id="heading"" href="{% url 'login' %}">Login for Employees</a></li>
+			<li><a id="heading"" href="{% url 'logout' %}">Logout</a></li>
+          </ul> 
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+</div>
+<div class="container theme-showcase">
+    <div class="jumbotron">
+        <h1 id = "maintitle" > Welcome Employee! </h1>
+    </div>
     <div id="sidebar">
-        {% block sidebar %}
-        <h4> Menu </h4>
-        <ul>
-            <li><a href="{% url 'menu' %}">Menu</a></li>
-    	    <li><a href="{% url 'updatemenu' %}">Update Price in Menu</a></li>
-    	    <li><a href="{% url 'addmenu' %}">Add Food to Menu</a></li>
-    	    <li><a href="{% url 'remmenu' %}">Remove Food from Menu</a></li>
-	</ul>
-        <h4> Inventory </h4>
-        <ul>
-            <li><a href="{% url 'inventory' %}">Inventory</a></li>
-    	    <li><a href="{% url 'updateinven' %}">Update Quantity in Inventory</a></li>
-    	    <li><a href="{% url 'addinven' %}">Add Ingredient to Inventory</a></li>
-    	    <li><a href="{% url 'reminven' %}">Remove Ingredient from Inventory</a></li>
-        </ul>
-        <h4> Order </h4>
-        {% endblock %}
+		<a href="{% url 'menu' %}" class="btn btn-default btn-block", role="button">Menu</a>
+		<a href="{% url 'updatemenu' %}" class="btn btn-default btn-block" role="button">Update Price</a>
+		<a href="{% url 'addmenu' %}" class="btn btn-default btn-block" role="button">Add Food</a>
+		<a href="{% url 'remmenu' %}" class="btn btn-default btn-block" role="button">Remove Food</a>
+ 	    </br> </br>
+		<a href="{% url 'inventory' %}" class="btn btn-default btn-block", role="button">Inventory</a>
+		<a href="{% url 'updateinven' %}" class="btn btn-default btn-block" role="button">Update Quantity</a>
+		<a href="{% url 'addinven' %}" class="btn btn-default btn-block" role="button">Add Ingredient</a>
+		<a href="{% url 'reminven' %}" class="btn btn-default btn-block" role="button">Remove Ingredient</a>
     </div>
-    <div id="menu">
-    {% if latest_menu_list %}
-    <form action="" id="add_order_form" method="post">
-    {% csrf_token %}
-        <h3> Food </h3> 
-            <select name="food"/> 
-	    {% for menu in latest_menu_list%}
-	        <option value= "{{menu.food}}" > {{menu.food}} </option>
-	    {% endfor %}
-            </select>
-        <h3> Quantity </h3>
-            <select name="quantity"/> 
-	            <option value= "0" selected> 0 </option>
-                <option value= "1" > 1 </option>
-                <option value= "2" > 2 </option>
-                <option value= "3" > 3 </option>
-                <option value= "4" > 4 </option>
- 	            <option value= "5" > 5 </option>        
-	            </select> 
-            </br>
-            </br>
-            <p><input type="button" id="submit_add_order" onclick="add_order_comment();" value="submit"/></p>
-    </form>
-    {% else %}
-        <p>No items in menu</p>
-    {% endif %}
-    </div><div id="content">
-    {% if latest_order_list %}
-    <form action="" id="delete_order_form" method="post">
-        <table class="table table-hover">
-        {% for order in latest_order_list %}
-            <tr>
-                <td>{{ order.order_food }} </td> 
-		        <td>{{ order.order_quantity }}</td>
-                <td><input type="button" id="submit_delete_order{{ order.id }}" onclick="delete_order_comment({{ order.id }})" value="Complete Order"/></td>
+   	<div id="main">	
+		 <h4> Add Order </h4>
+         {% if latest_menu_list %}
+         
+		 <form action="" id="add_order_form" method="post">
+         {% csrf_token %}
+		 <table class="table table-hover"> 	
+         <tr>
+			 <td> Food </td> 
+        	 <td> Quantity </td>
+		 </tr>
+		 <td>
+         <select name="food"/> 
+	            {% for menu in latest_menu_list%}
+	                <option value= "{{menu.food}}" > {{menu.food}} </option>
+	            {% endfor %}
+         </select></td>
+         <td>  
+				<select name="quantity"/> 
+	            	<option value= "0" selected> 0 </option>
+                	<option value= "1" > 1 </option>
+                	<option value= "2" > 2 </option>
+                	<option value= "3" > 3 </option>
+                	<option value= "4" > 4 </option>
+ 	            	<option value= "5" > 5 </option>        
+	        </select>
+			</td></tr></table>
+			<input type="button" id="submit_add_order" onclick="add_order_comment();" value="Add Order"/>
+          	</form> 
+        {% else %}
+           <p>No items in menu</p>
+        {% endif %}
+    	</br>
+		</br>
+		<h4> Current Orders </h4>
+        {% if latest_order_list %}
+        <form action="" id="delete_order_form" method="post">
+            <table class="table table-hover">
+			<tr>
+                    <td> Food </td> 
+		            <td> Quantity </td>
+					<td> Complete </td>
 			</tr>
-        {% endfor %}
-        </table></form>
-    {% else %}
-        <p>No items on menu.</p>  
-    {% endif %}
+            {% for order in latest_order_list %}
+                <tr>
+                    <td>{{ order.order_food }} </td> 
+		            <td>{{ order.order_quantity }}</td>
+                    <td><input type="button" id="submit_delete_order{{ order.id }}" onclick="delete_order_comment({{ order.id }})" value="Complete Order"/></td>
+			    </tr>
+        	{% endfor %}
+         </table></form>
+         {% else %}
+             <p>No items on menu.</p>  
+         {% endif %}
     </div> 
-    <div>
-         <p> Click <a href = "{% url 'logout' %}"> here </a> to logout. </p>
-    </div>
 </body>
 </html>
