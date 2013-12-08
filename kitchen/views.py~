@@ -9,8 +9,6 @@ from django.contrib import auth
 from django.core.context_processors import csrf 
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
-from django.utils import 
-from dajaxice.core import dajaxice_functions
 
 ##################################GENERAL##############################
 
@@ -22,9 +20,12 @@ def index(request):
 class EmployeeView(generic.ListView):
     template_name = 'kitchen/employee.html'
     context_object_name = 'latest_order_list'
-    def get_queryset(self):
-        return Order.objects.all()
-
+    queryset=Order.objects.all()
+    
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['latest_menu_list'] = Menu.objects.all()
+        return context
 #Success
 @login_required(login_url='/accounts/login/')
 def successresults(request):
@@ -50,7 +51,7 @@ def auth_view(request):
     user = auth.authenticate(username=username, password=password)
     if user is not None:
         auth.login(request, user)
-        return HttpResponseRedirect(reverse('loggedin'))
+        return HttpResponseRedirect(reverse('employee'))
     else:
         return HttpResponseRedirect(reverse('invalid_login'))
 
@@ -245,14 +246,3 @@ def u_makeorder(request):
             return HttpResponseRedirect(reverse('successresults'))
 	except IntegrityError:
   	    return HttpResponseRedirect(reverse('failresults'))
-'''
-def currentorder(request):
-    currentorder_dict = {}
-    p = Order.objects.all(): 
-    get_objects = p.filter(is_current=True)
-    currentorder_dict[food] = get_objects.order_food
-    currentorder_dict[quantity] = get_objects.order_quantity
-    table = render_to_string('employee.html', {'currentorder': currentorder_dict})
-    return simplejson.dumps({'table':table})
-
-dajaxice_functions.register(temperature)'''
