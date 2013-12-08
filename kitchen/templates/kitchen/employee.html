@@ -2,7 +2,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}/css/style.css" />  
     {% dajaxice_js_import %}
     <title>{% block title %} Welcome {% endblock %}</title>
 </head>
@@ -42,9 +45,6 @@ function delete_order_comment(pk){
     	    <li><a href="{% url 'reminven' %}">Remove Ingredient from Inventory</a></li>
         </ul>
         <h4> Order </h4>
-        <ul>
-            <li><a href="{% url 'makeorder' %}">Make Order</a></li>
-        </ul>
         {% endblock %}
     </div>
     <div id="menu">
@@ -76,15 +76,15 @@ function delete_order_comment(pk){
     </div><div id="content">
     {% if latest_order_list %}
     <form action="" id="delete_order_form" method="post">
-        <table>
+        <table class="table table-hover">
         {% for order in latest_order_list %}
             <tr>
                 <td>{{ order.order_food }} </td> 
 		        <td>{{ order.order_quantity }}</td>
                 <td><input type="button" id="submit_delete_order{{ order.id }}" onclick="delete_order_comment({{ order.id }})" value="Complete Order"/></td>
 			</tr>
-    {% endfor %}
-    </table></form>
+        {% endfor %}
+        </table></form>
     {% else %}
         <p>No items on menu.</p>  
     {% endif %}

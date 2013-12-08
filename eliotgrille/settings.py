@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'kitchen',
     'dajaxice',
     'dajax',
+    'bootstrap3',
 )
 
 MIDDLEWARE_CLASSES = (

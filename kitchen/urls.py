@@ -60,8 +60,6 @@ urlpatterns = patterns('',
     
     # ordering system - kitchen side
     url(r'^makeorder/$', login_required(views.MakeOrderView.as_view()), name='makeorder'),
-    url(r'^u_makeorder/$', views.u_makeorder, name='u_makeorder'),
-    #url(r'^currentorders/$', views.MUpdateView.as_view(), name='currentorders'),
 )
 
 urlpatterns += staticfiles_urlpatterns()

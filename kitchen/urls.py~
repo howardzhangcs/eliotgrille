@@ -16,6 +16,7 @@ from django.conf import settings
 urlpatterns = patterns('',
     #dajaxice
     url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
+    url(r'^%s/' % settings.DAJAXICE_MEDIA_PREFIX, include('dajaxice.urls')),
 
     # general index
     url(r'^$', views.index, name='index'),

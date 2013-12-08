@@ -221,7 +221,8 @@ def u_menu(request):
 #######################################################################################
 
 
-####################Ordering for Kitchen#######################################
+############################Ordering for Kitchen#######################################
+
 #displays site to make order
 class MakeOrderView(generic.ListView):    
     template_name = 'kitchen/makeorder.html'
@@ -229,19 +230,4 @@ class MakeOrderView(generic.ListView):
     def get_queryset(self):
         return Menu.objects.all()
 
-@login_required(login_url='/accounts/login/')
-def u_makeorder(request):
-    p = request.POST['food']
-    try:
-        n = int(request.POST['quantity'])
-    except ValueError:
-        return HttpResponseRedirect(reverse('failresults'))      
-    if  n == 0:
-        return HttpResponseRedirect(reverse('failresults')) 
-    else:
-        try:
-            m = Order(order_food = p, order_quantity = n, is_currentorder = True, dateofentry = timezone.now())
-            m.save()
-            return HttpResponseRedirect(reverse('successresults'))
-	except IntegrityError:
-  	    return HttpResponseRedirect(reverse('failresults'))
+######################################################################################
