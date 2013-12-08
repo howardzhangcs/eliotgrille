@@ -60,6 +60,3 @@ urlpatterns = patterns('',
     #url(r'^currentorders/$', views.MUpdateView.as_view(), name='currentorders'),
 )
 
-#urlpatterns += patterns('',
-    #url(r'^currentorder/$', 'temperature', name="monitor-test"),
-#)
