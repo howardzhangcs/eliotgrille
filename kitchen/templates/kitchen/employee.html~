@@ -15,6 +15,12 @@
         Dajaxice.kitchen.temp_add_order(my_callback, {'form': data});
     }
     function my_callback(data){
+	    if(data!=Dajaxice.EXCEPTION){
+            document.getElementById('your_table_container_id').innerHTML = data.table;
+        }
+        else{
+            alert('Error');
+        }
     }
 </script>
 
@@ -63,7 +69,7 @@
 	            </select> 
             </br>
             </br>
-            <p><input type="button" id="submit_add_order" onclick="add_order_comment();" type="submit" alt="register"/></p>
+            <p><input type="button" id="submit_add_order" onclick="add_order_comment();" value="submit" alt="register"/></p>
     </form>
     {% else %}
         <p>No items in menu</p>

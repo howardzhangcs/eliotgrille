@@ -15,6 +15,12 @@
         Dajaxice.kitchen.temp_add_order(my_callback, {'form': data});
     }
     function my_callback(data){
+	    if(data!=Dajaxice.EXCEPTION){
+            document.getElementById('content').innerHTML = data.table;
+        }
+        else{
+            alert('Error');
+        }
     }
 </script>
 
