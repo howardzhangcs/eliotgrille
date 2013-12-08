@@ -40,6 +40,7 @@ INSTALLED_APPS = (
      #add kitchen to installed apps
     'kitchen',
     'dajaxice',
+    'dajax',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -104,3 +105,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+DAJAXICE_MEDIA_PREFIX="dajaxice"

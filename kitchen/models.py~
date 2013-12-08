@@ -22,7 +22,7 @@ class Menu(models.Model):
 class Order(models.Model):
     order_food = models.CharField(max_length=200)
     order_quantity = models.PositiveIntegerField(default=0)
-    is_current = models.BooleanField(default=True)
+    is_currentorder = models.BooleanField(default=True)
     dateofentry = models.DateTimeField('date published')
     def __unicode__(self):
         return self.order_food

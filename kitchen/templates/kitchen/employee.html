@@ -7,21 +7,20 @@
     <title>{% block title %} Welcome {% endblock %}</title>
 </head>
 
-<script type="text/javascript" src="{{ STATIC_URL }}/js/jquery-1.10.2.min.js"> </script>
+<script type="text/javascript" src="{{ STATIC_URL }}/jquery-1.7.2.min.js"> </script>
+<script type="text/javascript" src="{{ STATIC_URL }}/jquery.ba-serializeobject.min.js"> </script>
+<script type="text/javascript" src="{{ STATIC_URL }}/jquery.dajax.core.js"> </script>
 
 <script type="text/javascript">
-    function add_order_comment(){
-        var data = $('#add_order_form').serialize()
-        Dajaxice.kitchen.temp_add_order(my_callback, {'form': data});
-    }
-    function my_callback(data){
-	    if(data!=Dajaxice.EXCEPTION){
-            document.getElementById('content').innerHTML = data.table;
-        }
-        else{
-            alert('Error');
-        }
-    }
+function add_order_comment(){
+    var data = $('#add_order_form').serializeObject();
+    Dajaxice.kitchen.temp_add_order(Dajax.process, {'form': data});
+}
+function delete_order_comment(pk){
+    Dajaxice.kitchen.temp_delete_order(Dajax.process, {'form': pk});
+}
+
+
 </script>
 
 <body>
@@ -69,25 +68,27 @@
 	            </select> 
             </br>
             </br>
-            <p><input type="button" id="submit_add_order" onclick="add_order_comment();" value="submit" alt="register"/></p>
+            <p><input type="button" id="submit_add_order" onclick="add_order_comment();" value="submit"/></p>
     </form>
     {% else %}
         <p>No items in menu</p>
     {% endif %}
     </div><div id="content">
     {% if latest_order_list %}
+    <form action="" id="delete_order_form" method="post">
         <table>
         {% for order in latest_order_list %}
             <tr>
                 <td>{{ order.order_food }} </td> 
-		<td>{{ order.order_quantity }}</td>
-            </tr>
-	{% endfor %}
-        </table>
+		        <td>{{ order.order_quantity }}</td>
+                <td><input type="button" id="submit_delete_order{{ order.id }}" onclick="delete_order_comment({{ order.id }})" value="Complete Order"/></td>
+			</tr>
+    {% endfor %}
+    </table></form>
     {% else %}
         <p>No items on menu.</p>  
     {% endif %}
-    </div>
+    </div> 
     <div>
          <p> Click <a href = "{% url 'logout' %}"> here </a> to logout. </p>
     </div>
