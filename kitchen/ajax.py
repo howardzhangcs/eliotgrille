@@ -6,6 +6,8 @@ from django.core import serializers
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
+#http://www.pythondiary.com/tutorials/django-and-ajax-dajaxice.html
+#http://www.pythondiary.com/tutorials/django-and-ajax-dajax.html
 @dajaxice_register
 def temp_add_order(req, form):
     dajax = Dajax()

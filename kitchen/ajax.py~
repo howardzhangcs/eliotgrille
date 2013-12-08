@@ -6,13 +6,15 @@ from django.core import serializers
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
+#http://www.pythondiary.com/tutorials/django-and-ajax-dajaxice.html
+#http://www.pythondiary.com/tutorials/django-and-ajax-dajax.html
 @dajaxice_register
 def temp_add_order(req, form):
     dajax = Dajax()
     p = form['food']
     n = int(form['quantity'])
     if n == 0:
-        dajax.alert("You Selected Zero Quantity")
+        dajax.alert("You Selected a Zero Quantity")
     else:
         m = Order(order_food = p, order_quantity = n, is_currentorder = True, dateofentry = timezone.now())
         m.save() 
