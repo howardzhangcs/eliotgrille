@@ -17,7 +17,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" style="color:#35CDFF" href=''>Eliot Grille</a>
+          <a class="navbar-brand" id="heading" href=''>Eliot Grille</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -36,6 +36,7 @@
         <h1>Menu</h1>
 	</div> 
     {% if latest_menu_list %}
+	{% csrf_token %}
         {% for menu in latest_menu_list %}
             <h3>{{ menu.food }} <span class="label label-default">${{menu.price_food}}</span></h3></br>
         {% endfor %}

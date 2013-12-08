@@ -153,6 +153,13 @@ class MenuView(generic.ListView):
     def get_queryset(self):
         return Menu.objects.all()
 
+#site for employees to view menu
+class EmployeeMenuView(generic.ListView):
+    template_name = 'kitchen/employeemenu.html'
+    context_object_name = 'latest_menu_list'
+    def get_queryset(self):
+        return Menu.objects.all()
+
 #site to add food to menu
 @login_required(login_url='/accounts/login/')
 def addmenu(request):

@@ -22,7 +22,7 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"> <a id="heading" href="{% url 'employee' %}">Home</a></li>
-			<li><a id="heading"" href="{% url 'login' %}">Login</a></li>
+			<li><a id="heading"" href="{% url 'logout' %}">Logout</a></li>
           </ul> 
         </div><!--/.nav-collapse -->
       </div>
@@ -30,7 +30,16 @@
 </div>
 </br></br></br>
 <div class="container theme-showcase">
-    <h2>Your login details are invalid! </h2>
-    <p>Click <a href= "{% url 'login' %}">here</a> to login again.</p>
-</div>
+	<h1> Menu </h1>
+
+	{% if latest_menu_list %}
+    	<ul>
+    	{% for menu in latest_menu_list %}
+        	<li>{{ menu.food }}: ${{ menu.price_food }}</li>
+    	{% endfor %}
+    	</ul>
+	{% else %}
+    	<p>No items in menu.</p>
+	{% endif %}
+</
 </html>

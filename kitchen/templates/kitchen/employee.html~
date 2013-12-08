@@ -36,12 +36,11 @@ function delete_order_comment(pk){
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" id="heading" href="{% url 'menu' %}">Eliot Grille</a>
+          <a class="navbar-brand" id="heading" href="">Eliot Grille</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"> <a id="heading" href="{% url 'employee' %}">Home</a></li>
-		    <li><a id="heading"" href="{% url 'login' %}">Login for Employees</a></li>
 			<li><a id="heading"" href="{% url 'logout' %}">Logout</a></li>
           </ul> 
         </div><!--/.nav-collapse -->
@@ -53,18 +52,18 @@ function delete_order_comment(pk){
         <h1 id = "maintitle" > Welcome Employee! </h1>
     </div>
     <div id="sidebar">
-		<a href="{% url 'menu' %}" class="btn btn-default btn-block", role="button">Menu</a>
+		<a href="{% url 'menu' %}" class="btn btn-lg btn-primary btn-block", role="button">Menu</a>
 		<a href="{% url 'updatemenu' %}" class="btn btn-default btn-block" role="button">Update Price</a>
 		<a href="{% url 'addmenu' %}" class="btn btn-default btn-block" role="button">Add Food</a>
 		<a href="{% url 'remmenu' %}" class="btn btn-default btn-block" role="button">Remove Food</a>
  	    </br> </br>
-		<a href="{% url 'inventory' %}" class="btn btn-default btn-block", role="button">Inventory</a>
+		<a href="{% url 'inventory' %}" class="btn btn-lg btn-primary btn-block", role="button">Inventory</a>
 		<a href="{% url 'updateinven' %}" class="btn btn-default btn-block" role="button">Update Quantity</a>
 		<a href="{% url 'addinven' %}" class="btn btn-default btn-block" role="button">Add Ingredient</a>
 		<a href="{% url 'reminven' %}" class="btn btn-default btn-block" role="button">Remove Ingredient</a>
     </div>
    	<div id="main">	
-		 <h4> Add Order </h4>
+		 <h4 id="maintitle"> Add Order </h4>
          {% if latest_menu_list %}
          
 		 <form action="" id="add_order_form" method="post">
@@ -97,14 +96,14 @@ function delete_order_comment(pk){
         {% endif %}
     	</br>
 		</br>
-		<h4> Current Orders </h4>
+		<h4 id="maintitle"> Current Orders </h4>
         {% if latest_order_list %}
         <form action="" id="delete_order_form" method="post">
             <table class="table table-hover">
 			<tr>
                     <td> Food </td> 
 		            <td> Quantity </td>
-					<td> Complete </td>
+					<td></td>
 			</tr>
             {% for order in latest_order_list %}
                 <tr>

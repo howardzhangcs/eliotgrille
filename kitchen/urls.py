@@ -48,6 +48,7 @@ urlpatterns = patterns('',
     
     # menu
     url(r'^menu/$', views.MenuView.as_view(), name='menu'),
+	url(r'^employeemenu/$', views.EmployeeMenuView.as_view(), name='employeemenu'),
     url(r'^updatemenu/$',  login_required(views.UpdateMenuView.as_view()), name='updatemenu'),
     url(r'^u_menu/$', views.u_menu, name='u_menu'),    
 
