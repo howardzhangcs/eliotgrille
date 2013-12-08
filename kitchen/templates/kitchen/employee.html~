@@ -1,7 +1,11 @@
+{% load dajaxice_templatetags %}
 <!DOCTYPE html>
 <html lang="en">
+<script type="text/javascript" charset="utf-8">
+</script>
 <head>
     <link rel="stylesheet" href="style.css" />
+    {% dajaxice_js_import %}
     <title>{% block title %} Welcome {% endblock %}</title>
 </head>
 
@@ -25,14 +29,10 @@
         </ul>
         <h4> Order </h4>
         <ul>
-            <li><a href="{% url 'inventory' %}">Inventory</a></li>
-    	    <li><a href="{% url 'updateinven' %}">Update Quantity in Inventory</a></li>
-    	    <li><a href="{% url 'addinven' %}">Add Ingredient to Inventory</a></li>
-    	    <li><a href="{% url 'reminven' %}">Remove Ingredient from Inventory</a></li>
+            <li><a href="{% url 'makeorder' %}">Make Order</a></li>
         </ul>
         {% endblock %}
     </div>
-
     <div id="content">
         {% block content %}{% endblock %}
     </div>

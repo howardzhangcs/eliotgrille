@@ -3,11 +3,14 @@ from django.views import generic
 from kitchen.models import Inventory, Menu, Order
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from django.utils import timezone
+from django.utils import timezone, simplejson
 from django.db.utils import IntegrityError
 from django.contrib import auth
 from django.core.context_processors import csrf 
 from django.contrib.auth.decorators import login_required
+from django.template.loader import render_to_string
+from django.utils import 
+from dajaxice.core import dajaxice_functions
 
 ##################################GENERAL##############################
 
@@ -107,7 +110,7 @@ def u_inven(request):
         n = int(request.POST['quantity'])
     except ValueError:
         return HttpResponseRedirect(reverse('failresults'))
-    if n == 0 or p.stock_material - n < 0:
+    if n == 0 or p.stock_material + n < 0:
         return HttpResponseRedirect(reverse('failresults'))
     else:
         p.stock_material += int(request.POST['quantity'])
@@ -242,4 +245,14 @@ def u_makeorder(request):
             return HttpResponseRedirect(reverse('successresults'))
 	except IntegrityError:
   	    return HttpResponseRedirect(reverse('failresults'))
+'''
+def currentorder(request):
+    currentorder_dict = {}
+    p = Order.objects.all(): 
+    get_objects = p.filter(is_current=True)
+    currentorder_dict[food] = get_objects.order_food
+    currentorder_dict[quantity] = get_objects.order_quantity
+    table = render_to_string('employee.html', {'currentorder': currentorder_dict})
+    return simplejson.dumps({'table':table})
 
+dajaxice_functions.register(temperature)'''

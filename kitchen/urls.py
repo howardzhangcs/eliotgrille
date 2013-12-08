@@ -7,8 +7,13 @@ from kitchen import views
 from django.contrib import admin
 admin.autodiscover()
 
+from dajaxice.core import dajaxice_autodiscover, dajaxice_config
+dajaxice_autodiscover()
 
 urlpatterns = patterns('',
+    #dajaxice
+    url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
+
     # general index
     url(r'^$', views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
@@ -54,3 +59,7 @@ urlpatterns = patterns('',
     url(r'^u_makeorder/$', views.u_makeorder, name='u_makeorder'),
     #url(r'^currentorders/$', views.MUpdateView.as_view(), name='currentorders'),
 )
+
+#urlpatterns += patterns('',
+    #url(r'^currentorder/$', 'temperature', name="monitor-test"),
+#)
