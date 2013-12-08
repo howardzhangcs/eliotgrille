@@ -32,7 +32,18 @@
         {% endblock %}
     </div>
     <div id="content">
-        {% block content %}{% endblock %}
+    {% if latest_order_list %}
+        <table>
+        {% for order in latest_order_list %}
+            <tr>
+                <td>{{ order.order_food }} </td> 
+		<td>{{ order.order_quantity }}</td>
+            </tr>
+	{% endfor %}
+        </table>
+    {% else %}
+        <p>No items on menu.</p>  
+    {% endif %}
     </div>
     <div>
          <p> Click <a href = "{% url 'logout' %}"> here </a> to logout. </p>
